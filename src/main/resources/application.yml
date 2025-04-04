@@ -1,0 +1,68 @@
+ct:
+  application:
+    context: ${CONTEXT_PATH:/ct}
+    name: ct-vote-manager
+  port: ${PORT:8080}
+  log:
+    level: DEBUG
+  database:
+    name: ${DB_NAME:VoteManagerDataBase}
+    username: ${DB_CONNECTION_USER_NAME:admin}
+    password: ${DB_CONNECTION_PASSWORD:admin}
+    host: ${BD_CONNECTION_HOST:localhost}
+    ddlAuto: validate
+    port: 5432
+    showSql: false
+    enableFlyway: ${RUN_FLYWAY:false}
+
+
+spring:
+  output:
+    ansi:
+      enabled: detect
+  application:
+    name: ${ct.application.name}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  datasource:
+    url: jdbc:postgresql://${ct.database.host}:${ct.database.port}/${ct.database.name}
+    username: ${ct.database.username}
+    password: ${ct.database.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      order_by:
+        default_null_ordering: last
+    hibernate:
+      ddl-auto: ${ct.database.ddlAuto}
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: ${ct.database.showSql}
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: ${ct.database.enableFlyway}
+    schemas: public
+    locations: filesystem:src/main/resources/scripts/migrations
+    user: ${ct.database.username}
+    password: ${ct.database.password}
+  web:
+    locale: pt_BR
+    resources:
+      add-mappings: false
+  mvc:
+    format:
+      date: dd/MM/yyyy
+  servlet:
+    multipart:
+      enabled: false
+
+server:
+  port: ${ct.port}
+  servlet:
+    context-path: ${ct.application.context}
