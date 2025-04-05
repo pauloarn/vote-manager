@@ -1,0 +1,18 @@
+volumes:
+  ct_vol:
+
+networks:
+  ct_net:
+    name: ct_net
+
+services:
+  ct_db:
+    container_name: ctVoteManager_db
+    image: postgres:17-alpine
+    restart: "no"
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=VoteManagerDB
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=voteManagerStrong@123

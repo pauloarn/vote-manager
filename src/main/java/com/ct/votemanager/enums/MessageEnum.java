@@ -11,9 +11,8 @@ public enum MessageEnum {
     METHOD_NOT_SUPPORTED("message.api.method.not.supported"),
     MISSING_REQUEST_PARAMETER("message.api.missing.request.parameter"),
     UNKNOWN_ERROR("message.api.error.desconhecido"),
-
     INVALID_TOKEN("message.api.invalid.token"),
-    FAIL_TO_CREATE_TOKEN("message.api.fail.to.create.token"),;
+    FAIL_TO_CREATE_TOKEN("message.api.fail.to.create.token");
 
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
     private String description;
