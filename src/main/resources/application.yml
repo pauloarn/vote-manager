@@ -67,6 +67,9 @@ server:
   servlet:
     context-path: ${ct.application.context}
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
 
 logging:
   pattern:
