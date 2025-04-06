@@ -7,13 +7,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 
 import static com.nt.votemanager.utils.ExceptionUtils.logException;
 
@@ -54,40 +50,6 @@ public abstract class AbstractService {
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .messageEnum(messageEnum)
                 .build();
-    }
-
-    protected Supplier<ApiErrorException> supplierThrowUnprocessableEntity(MessageEnum messageEnum) {
-        return () -> ApiErrorException.builder()
-                .unprocessabelEntity()
-                .messageEnum(messageEnum)
-                .build();
-    }
-
-    protected Supplier<ApiErrorException> supplierThrowNotFound(MessageEnum messageEnum) {
-        return () -> ApiErrorException.builder()
-                .notFound()
-                .messageEnum(messageEnum)
-                .build();
-    }
-
-    protected Supplier<ApiErrorException> supplierThrowApiErrorException(MessageEnum messageEnum, HttpStatus httpStatus) {
-        return () -> ApiErrorException.builder()
-                .httpStatus(httpStatus)
-                .messageEnum(messageEnum)
-                .build();
-    }
-
-    public Pageable generatePageable(Integer page, Integer size) {
-        if (page == null || size == null)
-            return null;
-        return generatePageable(page, size, Sort.unsorted());
-    }
-
-    public Pageable generatePageable(Integer page, Integer size, Sort sort) {
-        if (page == null || size == null)
-            return null;
-        if (page - 1 > -1) page = page - 1;
-        return PageRequest.of(page, size, sort);
     }
 
     public boolean isNull(Object obj) {

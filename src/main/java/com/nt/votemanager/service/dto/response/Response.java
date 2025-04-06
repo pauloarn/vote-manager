@@ -42,7 +42,7 @@ public class Response<D> implements Serializable {
     }
 
     public Response<D> setOk() {
-        MessageEnum messageApiEnum = MessageEnum.REQUISICAO_CONCLUIDA;
+        MessageEnum messageApiEnum = MessageEnum.REQUEST_FINISHED;
         this.statusCode = 200;
         this.messageCode = messageApiEnum.name();
         this.message = messageApiEnum.getMessage();
@@ -50,7 +50,7 @@ public class Response<D> implements Serializable {
     }
 
     public Response<D> setCreated() {
-        MessageEnum messageApiEnum = MessageEnum.REQUISICAO_CONCLUIDA;
+        MessageEnum messageApiEnum = MessageEnum.REQUEST_FINISHED;
         this.statusCode = 201;
         this.messageCode = messageApiEnum.name();
         this.message = messageApiEnum.getMessage();

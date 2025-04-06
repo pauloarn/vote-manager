@@ -27,10 +27,10 @@ public class Agenda {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "startAt")
+    @Column(name = "startAt", nullable = true)
     private LocalDateTime startAt;
 
-    @Column(name = "endAt")
+    @Column(name = "endAt", nullable = true)
     private LocalDateTime endAt;
 
     @CreationTimestamp

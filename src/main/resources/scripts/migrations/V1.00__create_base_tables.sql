@@ -3,8 +3,8 @@ CREATE TABLE agenda
     id          SERIAL PRIMARY KEY,
     title       varchar(255) NOT NULL,
     description varchar(255),
-    startAt     timestamp    not null,
-    endAt       timestamp    not null,
+    startAt     timestamp,
+    endAt       timestamp,
     createdAt   timestamp    not null,
     updatedAt   timestamp    not null
 );
