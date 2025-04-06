@@ -1,12 +1,13 @@
-ct:
+nt:
   application:
-    context: ${CONTEXT_PATH:/ct}
-    name: ct-vote-manager
+    context: ${CONTEXT_PATH:/nt}
+    name: nt-vote-manager
   port: ${PORT:8080}
   log:
     level: DEBUG
   database:
-    name: ${DB_NAME:VoteManagerDB}
+    name: ${DB_NAME:NTDataBase}
+    schema: ${DB_SCHEMA:vote_manager}
     username: ${DB_CONNECTION_USER_NAME:admin}
     password: ${DB_CONNECTION_PASSWORD:admin}
     host: ${BD_CONNECTION_HOST:localhost}
@@ -21,14 +22,14 @@ spring:
     ansi:
       enabled: detect
   application:
-    name: ${ct.application.name}
+    name: ${nt.application.name}
   jackson:
     serialization:
       write-dates-as-timestamps: true
   datasource:
-    url: jdbc:postgresql://${ct.database.host}:${ct.database.port}/${ct.database.name}
-    username: ${ct.database.username}
-    password: ${ct.database.password}
+    url: jdbc:postgresql://${nt.database.host}:${nt.database.port}/${nt.database.name}
+    username: ${nt.database.username}
+    password: ${nt.database.password}
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
@@ -39,18 +40,18 @@ spring:
       order_by:
         default_null_ordering: last
     hibernate:
-      ddl-auto: ${ct.database.ddlAuto}
+      ddl-auto: ${nt.database.ddlAuto}
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: ${ct.database.showSql}
+    show-sql: ${nt.database.showSql}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
-    enabled: ${ct.database.enableFlyway}
-    schemas: ${ct.database.name}
+    enabled: ${nt.database.enableFlyway}
+    schemas: ${nt.database.schema}
     locations: filesystem:src/main/resources/scripts/migrations
-    user: ${ct.database.username}
-    password: ${ct.database.password}
+    user: ${nt.database.username}
+    password: ${nt.database.password}
   web:
     locale: pt_BR
     resources:
@@ -63,9 +64,9 @@ spring:
       enabled: false
 
 server:
-  port: ${ct.port}
+  port: ${nt.port}
   servlet:
-    context-path: ${ct.application.context}
+    context-path: ${nt.application.context}
 
 springdoc:
   swagger-ui:
@@ -73,8 +74,8 @@ springdoc:
 
 logging:
   pattern:
-    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${ct.application.name}]){magenta}%clr(%X{cdTransacao}){yellow}%clr(%X{contexto}){blue} %clr(%m%n){%5p} ${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
-    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${ct.application.name}]){magenta}%clr(%X{contexto}){magenta}%clr(%X{cdTransacao}){magenta} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${nt.application.name}]){magenta}%clr(%X{cdTransacao}){yellow}%clr(%X{contexto}){blue} %clr(%m%n){%5p} ${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${nt.application.name}]){magenta}%clr(%X{contexto}){magenta}%clr(%X{cdTransacao}){magenta} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
   level:
-    com.ct: ${ct.log.level}
+    com.nt: ${nt.log.level}
     root: INFO
