@@ -12,10 +12,10 @@ CREATE TABLE agenda
 create table agenda_vote
 (
     id        serial primary key,
-    agenda_id serial      not null,
+    agenda_fk serial      not null,
     vote      varchar(5)  not null,
     voter     varchar(11) not null,
     createdAt timestamp   not null,
 
-    CONSTRAINT AgendaVoteAgenda foreign key (agenda_id) references agenda (id)
+    CONSTRAINT AgendaVoteAgenda foreign key (agenda_fk) references agenda (id)
 )

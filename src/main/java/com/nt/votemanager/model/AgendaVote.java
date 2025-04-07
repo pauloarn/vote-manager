@@ -32,4 +32,10 @@ public class AgendaVote {
     @Column(name = "createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+
+    @ManyToOne()
+    @JoinColumn(name = "agenda_fk")
+    private Agenda agenda;
+
+
 }

@@ -46,6 +46,24 @@ public class AgendaService extends AbstractServiceRepo<AgendaRepository, Agenda,
         return new AgendaResponseDTO(agenda);
     }
 
+    public Agenda getAgentaVorVote(Integer id) throws ApiErrorException {
+        Agenda agenda = this.getAgendaBydId(id);
+        validateAgendaIsOpen(agenda);
+        return agenda;
+    }
+
+    private void validateAgendaIsOpen(Agenda agenda) throws ApiErrorException {
+        if (isNull(agenda.getStartAt()) || isNull(agenda.getEndAt())) {
+            throwBadRequest(MessageEnum.AGENDA_VOTE_SESSION_NOT_STARTED);
+        }
+        if (LocalDateTime.now().isBefore(agenda.getStartAt())) {
+            throwBadRequest(MessageEnum.AGENDA_VOTE_SESSION_NOT_STARTED);
+        }
+        if (LocalDateTime.now().isAfter(agenda.getEndAt())) {
+            throwBadRequest(MessageEnum.AGENDA_VOTE_SESSION_ALREADY_ENDED);
+        }
+    }
+
     private void validateAgendaCanBeStarted(Agenda agenda) throws ApiErrorException {
         if (validateSessionStarted(agenda)) {
             throwBadRequest(MessageEnum.AGENDA_VOTE_SESSION_ALREADY_STARTED);

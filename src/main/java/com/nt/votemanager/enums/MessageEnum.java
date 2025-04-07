@@ -13,7 +13,10 @@ public enum MessageEnum {
     UNKNOWN_ERROR("message.api.unknown.error"),
     AGENDA_NOT_FOUND("message.api.agenda.not.found"),
     AGENDA_VOTE_SESSION_ALREADY_STARTED("message.api.vote.session.already.started"),
-    AGENDA_VOTE_SESSION_ALREADY_ENDED("message.api.vote.session.already.ended");
+    AGENDA_VOTE_SESSION_ALREADY_ENDED("message.api.vote.session.already.ended"),
+    AGENDA_VOTE_SESSION_NOT_STARTED("message.api.vote.session.not.started"),
+    VOTE_ALREADY_VOTED_IN_SESSION("message.api.voter.already.voted.in.session"),
+    ;
 
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
     private String description;

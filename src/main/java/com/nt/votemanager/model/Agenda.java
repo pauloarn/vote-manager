@@ -10,6 +10,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,4 +42,7 @@ public class Agenda {
     @UpdateTimestamp
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "agenda", cascade = CascadeType.ALL)
+    private List<AgendaVote> votes = new ArrayList<>();
 }
