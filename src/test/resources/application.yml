@@ -1,0 +1,41 @@
+spring:
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enabled: never
+  application:
+    name: nt-vote-manager
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  datasource:
+    url: jdbc:h2:mem:NTDataBase;MODE=PostgreSQL;AUTO_RECONNECT=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS vote_manager;DB_CLOSE_DELAY=-1
+    username: root
+    password: root@123
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      order_by:
+        default_null_ordering: last
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: true
+    schemas: NTDataBase
+    locations: filesystem:src/main/resources/scripts/migrations
+    user: root
+    password: root@123
+  devtools:
+    remote:
+      restart:
+        enabled: false

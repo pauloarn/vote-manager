@@ -1,9 +1,13 @@
 package com.nt.votemanager.service.dto.response;
 
 import com.nt.votemanager.model.Agenda;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class BaseAgendaResponseDTO {
     public Integer id;
     public String title;
