@@ -15,6 +15,8 @@ nt:
     port: 5432
     showSql: false
     enableFlyway: ${RUN_FLYWAY:false}
+  urls:
+    validate-api-url: https://user-info.herokuapp.com
 
 
 spring:

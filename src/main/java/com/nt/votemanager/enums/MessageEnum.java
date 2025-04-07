@@ -16,7 +16,7 @@ public enum MessageEnum {
     AGENDA_VOTE_SESSION_ALREADY_ENDED("message.api.vote.session.already.ended"),
     AGENDA_VOTE_SESSION_NOT_STARTED("message.api.vote.session.not.started"),
     VOTE_ALREADY_VOTED_IN_SESSION("message.api.voter.already.voted.in.session"),
-    ;
+    EXTERNAL_ERROR("message.api.external.error");
 
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
     private String description;
