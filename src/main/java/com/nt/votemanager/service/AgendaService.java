@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.nt.votemanager.utils.DateUtils.getEndDateFromFormatedString;
 
@@ -33,6 +34,16 @@ public class AgendaService extends AbstractServiceRepo<AgendaRepository, Agenda,
     public AgendaResponseDTO getAgendaDTOById(Integer id) throws ApiErrorException {
         Agenda agenda = getAgendaBydId(id);
         return new AgendaResponseDTO(agenda);
+    }
+
+    public List<Agenda> findFinishedAndNotSyncedAgendas() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Agenda> finishedAgendas = repository.findAgendaFinishedLastMinute(now);
+        finishedAgendas.forEach(a -> {
+            a.setHasSynced(true);
+            save(a);
+        });
+        return finishedAgendas;
     }
 
 

@@ -15,6 +15,17 @@ nt:
     port: 5432
     showSql: false
     enableFlyway: ${RUN_FLYWAY:false}
+  rabbitmq:
+    host: ${ACTIVE_MQ_HOST:localhost}
+    port: 5672
+    username: ${ACTIVE_MQ_USERNAME:admin}
+    password: ${ACTIVE_MQ_PASSWORD:admin123}
+    queue:
+      producer:
+        notify-agenda: notify-agenda-result
+  scheduler:
+    cron:
+      notify-agenda: * * * * *
 
 
 spring:
@@ -56,6 +67,11 @@ spring:
     locale: pt_BR
     resources:
       add-mappings: false
+  rabbitmq:
+    host: ${nt.rabbitmq.host}
+    port: ${nt.rabbitmq.port}
+    username: ${nt.rabbitmq.username}
+    password: ${nt.rabbitmq.password}
   mvc:
     format:
       date: dd/MM/yyyy

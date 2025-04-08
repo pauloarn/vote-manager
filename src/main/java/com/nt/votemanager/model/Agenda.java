@@ -43,6 +43,9 @@ public class Agenda {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
+    @Column(name = "has_synced", nullable = false)
+    private Boolean hasSynced = false;
+
     @OneToMany(mappedBy = "agenda", cascade = CascadeType.ALL)
     private List<AgendaVote> votes = new ArrayList<>();
 }
