@@ -10,7 +10,7 @@ nt:
     schema: ${DB_SCHEMA:vote_manager}
     username: ${DB_CONNECTION_USER_NAME:admin}
     password: ${DB_CONNECTION_PASSWORD:admin}
-    host: ${BD_CONNECTION_HOST:localhost}
+    host: ${DB_CONNECTION_HOST:localhost}
     ddlAuto: validate
     port: 5432
     showSql: false
@@ -25,7 +25,7 @@ nt:
         notify-agenda: notify-agenda-result
   scheduler:
     cron:
-      notify-agenda: * * * * *
+      notify-agenda: 0 * * * * ?
 
 
 spring:
