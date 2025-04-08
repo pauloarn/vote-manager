@@ -7,7 +7,7 @@ networks:
 
 services:
   nt_db:
-    container_name: ntVoteManager_db
+    container_name: nt_db
     image: postgres:17-alpine
     restart: "no"
     ports:
@@ -17,8 +17,8 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=voteManagerStrong@123
   nt_queue:
-    image: rabbitmq:3-management
     container_name: nt_queue
+    image: rabbitmq:3-management
     ports:
       - 5672:5672
       - 15672:15672
